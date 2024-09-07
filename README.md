@@ -1,2 +1,3 @@
-# static-error-pages
-Static error pages repository
+# Static error pages
+
+Static error pages repository.
