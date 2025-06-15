@@ -241,11 +241,11 @@
             .cta-button {
                 display: inline-block;
                 background: hsla(43, 100%, 56%, 1);
-                color: white;
+                color: black;
                 text-decoration: none;
                 padding: 12px 24px;
                 border-radius: 8px;
-                font-size: 0.9rem;
+                font-size: 1.2rem;
                 font-weight: 500;
                 transition: all 0.2s ease;
                 margin: 16px 0;
@@ -494,6 +494,25 @@
                 },
             };
 
+            // Helper function to get dynamic domain
+            function getDynamicDomain() {
+                const currentHostname = window.location.hostname;
+                const newHostname = currentHostname.replace('.com', '.ir');
+                const newUrl = `${window.location.protocol}//${newHostname}`;
+                return { newHostname, newUrl };
+            }
+
+            // Helper function to update CTA button with dynamic domain
+            function updateCtaButton(lang) {
+                const { newHostname, newUrl } = getDynamicDomain();
+                const ctaButton = document.getElementById("main-cta");
+                if (ctaButton) {
+                    const t = translations[lang];
+                    ctaButton.href = newUrl;
+                    ctaButton.textContent = t.ctaButton.replace('smkoacademy.ir', newHostname);
+                }
+            }
+
             // Language switching functionality
             function showLanguage(lang) {
                 // Hide all language sections
@@ -523,6 +542,9 @@
 
                 // Update translated content
                 updateContent(lang);
+                
+                // Update CTA button with dynamic domain if available
+                updateCtaButton(lang);
             }
 
             function updateContent(lang) {
@@ -534,7 +556,7 @@
                 document.getElementById("main-subtitle").textContent =
                     t.subtitle;
 
-                // Update CTA button
+                // Update CTA button (will be updated with dynamic domain in DOMContentLoaded)
                 document.getElementById("main-cta").textContent = t.ctaButton;
 
                 // Update footer labels
@@ -572,7 +594,7 @@
 
                 // Auto-redirect after 20 seconds
                 setTimeout(function () {
-                    window.location.href = "https://smkoacademy.ir";
+                    window.location.href = getDynamicDomain().newUrl;
                 }, 20000);
 
                 const interval = setInterval(function () {
