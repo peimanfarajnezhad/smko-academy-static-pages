@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SMKO Academy - Domain Update</title>
+        <link
+            href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Vazirmatn", -apple-system, BlinkMacSystemFont,
+                    "Segoe UI", Roboto, sans-serif;
+                background: linear-gradient(
+                        135deg,
+                        hsla(43, 100%, 56%, 0.8) 0%,
+                        hsla(43, 80%, 65%, 0.6) 25%,
+                        hsla(43, 60%, 75%, 0.4) 50%,
+                        hsla(43, 40%, 85%, 0.3) 75%,
+                        hsla(43, 20%, 95%, 0.2) 100%
+                    ),
+                    linear-gradient(
+                        45deg,
+                        hsla(43, 100%, 48%, 0.3) 0%,
+                        transparent 50%,
+                        hsla(43, 100%, 62%, 0.2) 100%
+                    );
+                position: relative;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                color: #1e293b;
+                overflow-x: hidden;
+            }
+
+            body::before {
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: repeating-conic-gradient(
+                        from 0deg at 50% 50%,
+                        transparent 0deg,
+                        rgba(0, 0, 0, 0.03) 1deg,
+                        transparent 2deg,
+                        rgba(255, 255, 255, 0.03) 3deg,
+                        transparent 4deg
+                    ),
+                    repeating-linear-gradient(
+                        0deg,
+                        transparent,
+                        rgba(0, 0, 0, 0.02) 1px,
+                        transparent 2px
+                    ),
+                    repeating-linear-gradient(
+                        90deg,
+                        transparent,
+                        rgba(255, 255, 255, 0.02) 1px,
+                        transparent 2px
+                    );
+                background-size: 100px 100px, 3px 3px, 3px 3px;
+                opacity: 0.6;
+                pointer-events: none;
+                z-index: 1;
+                filter: blur(0.5px) contrast(1.2);
+                mix-blend-mode: overlay;
+            }
+
+            body::after {
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(
+                        circle at 25% 25%,
+                        rgba(0, 0, 0, 0.1) 0%,
+                        transparent 50%
+                    ),
+                    radial-gradient(
+                        circle at 75% 75%,
+                        rgba(255, 255, 255, 0.1) 0%,
+                        transparent 50%
+                    ),
+                    repeating-radial-gradient(
+                        circle at 50% 50%,
+                        transparent 0px,
+                        rgba(0, 0, 0, 0.02) 1px,
+                        transparent 2px,
+                        rgba(255, 255, 255, 0.02) 3px,
+                        transparent 4px
+                    );
+                background-size: 200px 200px, 200px 200px, 50px 50px;
+                opacity: 0.4;
+                pointer-events: none;
+                z-index: 2;
+                filter: blur(0.3px);
+                mix-blend-mode: soft-light;
+            }
+
+            .container {
+                background: rgba(255, 255, 255, 0.7);
+                backdrop-filter: blur(30px);
+                border: 1px solid rgba(255, 255, 255, 0.9);
+                border-radius: 16px;
+                padding: 40px 32px;
+                max-width: 560px;
+                width: 100%;
+                text-align: center;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+                animation: fadeInUp 0.6s ease-out;
+                position: relative;
+                z-index: 10;
+            }
+
+            .logo {
+                width: 56px;
+                height: 56px;
+                background: linear-gradient(
+                    135deg,
+                    hsla(43, 100%, 56%, 1),
+                    hsla(43, 100%, 48%, 1)
+                );
+                border-radius: 12px;
+                margin: 0 auto 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 20px;
+                font-weight: 600;
+                color: white;
+                letter-spacing: 1px;
+            }
+
+            h1 {
+                color: #0f172a;
+                font-size: 1.875rem;
+                font-weight: 600;
+                margin-bottom: 8px;
+                line-height: 1.3;
+            }
+
+            .subtitle {
+                color: #64748b;
+                font-size: 1rem;
+                margin-bottom: 24px;
+                font-weight: 400;
+                line-height: 1.5;
+            }
+
+            .language-picker {
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                margin-bottom: 24px;
+                flex-wrap: wrap;
+            }
+
+            .language-btn {
+                background: rgba(248, 250, 252, 0.9);
+                border: 1px solid rgba(226, 232, 240, 0.8);
+                border-radius: 8px;
+                padding: 6px 16px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                font-size: 0.875rem;
+                font-weight: 500;
+                color: #475569;
+                font-family: "Vazirmatn", sans-serif;
+                backdrop-filter: blur(10px);
+            }
+
+            .language-btn:hover {
+                background: rgba(241, 245, 249, 0.95);
+                border-color: rgba(203, 213, 225, 0.8);
+                transform: translateY(-1px);
+            }
+
+            .language-btn.active {
+                background: hsla(43, 100%, 56%, 1);
+                color: white;
+                border-color: hsla(43, 100%, 56%, 1);
+                box-shadow: 0 2px 8px hsla(43, 100%, 56%, 0.3);
+            }
+
+            .language-section {
+                margin-bottom: 24px;
+                padding: 24px 20px;
+                background: rgba(248, 250, 252, 0.7);
+                border-radius: 12px;
+                border: 1px solid rgba(226, 232, 240, 0.6);
+                min-height: 100px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                backdrop-filter: blur(10px);
+                animation: slideIn 0.3s ease-out;
+            }
+
+            .language-section.hidden {
+                display: none;
+            }
+
+            .language-title {
+                font-size: 1.2rem;
+                font-weight: 600;
+                color: #667eea;
+                margin-bottom: 16px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            .message {
+                font-size: 1rem;
+                line-height: 1.6;
+                color: #334155;
+                font-weight: 400;
+                text-align: start;
+            }
+
+            .krd,
+            .fa {
+                direction: rtl;
+                text-align: center;
+            }
+
+            .cta-button {
+                display: inline-block;
+                background: hsla(43, 100%, 56%, 1);
+                color: white;
+                text-decoration: none;
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                font-weight: 500;
+                transition: all 0.2s ease;
+                margin: 16px 0;
+                font-family: "Vazirmatn", sans-serif;
+                border: 1px solid hsla(43, 100%, 56%, 1);
+            }
+
+            .cta-button:hover {
+                background: hsla(43, 100%, 48%, 1);
+                border-color: hsla(43, 100%, 48%, 1);
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px hsla(43, 100%, 56%, 0.3);
+            }
+
+            .cta-button:active {
+                transform: translateY(0);
+            }
+
+            .footer {
+                margin-top: 24px;
+                padding-top: 20px;
+                border-top: 1px solid rgba(226, 232, 240, 0.6);
+                color: #94a3b8;
+                font-size: 0.8rem;
+                line-height: 1.4;
+            }
+
+            .redirect-info {
+                background: rgba(34, 197, 94, 0.1);
+                border: 1px solid rgba(34, 197, 94, 0.2);
+                border-radius: 8px;
+                padding: 12px 16px;
+                margin: 20px 0;
+                color: #166534;
+                font-size: 0.875rem;
+                font-weight: 500;
+                backdrop-filter: blur(10px);
+            }
+
+            /* RTL support for Persian */
+            .rtl {
+                direction: rtl;
+                text-align: center;
+            }
+
+            .rtl .language-picker {
+                direction: ltr;
+            }
+
+            @media (max-width: 768px) {
+                .container {
+                    padding: 32px 24px;
+                    margin: 16px;
+                }
+
+                h1 {
+                    font-size: 1.625rem;
+                }
+
+                .subtitle {
+                    font-size: 0.9rem;
+                }
+
+                .message {
+                    font-size: 0.95rem;
+                }
+
+                .cta-button {
+                    padding: 10px 20px;
+                    font-size: 0.875rem;
+                }
+
+                .language-picker {
+                    gap: 6px;
+                }
+
+                .language-btn {
+                    padding: 5px 12px;
+                    font-size: 0.8rem;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .container {
+                    padding: 24px 20px;
+                }
+
+                h1 {
+                    font-size: 1.5rem;
+                }
+
+                .logo {
+                    width: 48px;
+                    height: 48px;
+                    font-size: 18px;
+                }
+
+                .message {
+                    font-size: 0.9rem;
+                }
+
+                .cta-button {
+                    display: block;
+                    margin: 12px 0;
+                }
+            }
+
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="main-container">
+            <div class="logo">SA</div>
+            <h1 id="main-title">Domain Update</h1>
+            <p class="subtitle" id="main-subtitle">
+                Important Notice About Our New Website
+            </p>
+
+            <div class="redirect-info" id="redirect-info">
+                <strong>🔄 Automatic Redirect:</strong> You will be redirected
+                to our new domain in 20 seconds.
+            </div>
+
+            <div class="language-picker">
+                <button
+                    class="language-btn btn-en active"
+                    onclick="showLanguage('en')"
+                >
+                    English
+                </button>
+                <button
+                    class="language-btn btn-fa"
+                    onclick="showLanguage('fa')"
+                >
+                    فارسی
+                </button>
+                <button
+                    class="language-btn btn-krd"
+                    onclick="showLanguage('krd')"
+                >
+                    کوردی
+                </button>
+            </div>
+
+            <div class="language-section" id="lang-en">
+                <div class="message" id="message-en"></div>
+            </div>
+
+            <div class="language-section fa hidden" id="lang-fa">
+                <div class="message" id="message-fa"></div>
+            </div>
+
+            <div class="language-section krd hidden" id="lang-krd">
+                <div class="message" id="message-krd"></div>
+            </div>
+
+            <div style="margin: 32px 0">
+                <a
+                    href="https://smkoacademy.ir"
+                    class="cta-button"
+                    id="main-cta"
+                    >Visit smkoacademy.ir</a
+                >
+            </div>
+
+            <div class="footer">
+                <p>
+                    <strong id="old-domain-label">Old Domain:</strong>
+                    smkoacademy.com
+                </p>
+                <p>
+                    <strong id="new-domain-label">New Domain:</strong>
+                    smkoacademy.ir
+                </p>
+            </div>
+        </div>
+
+        <script>
+            // Update redirect counter
+            let countdown = 20;
+            let currentLanguage = "krd";
+
+            // Translation object
+            const translations = {
+                en: {
+                    title: "Domain Update",
+                    subtitle: "Important Announcement",
+                    redirectInfo:
+                        "🔄 Automatic Redirect: You will be redirected to our new domain in {countdown} seconds.",
+                    redirectingNow: "🔄 Redirecting now...",
+                    ctaButton: "Visit smkoacademy.ir",
+                    oldDomain: "Old Domain:",
+                    newDomain: "New Domain:",
+                    brandName: "SMKO Academy",
+                    message:
+                        "Due to the current situation in the country and disruptions in international internet access, Semco Academy has temporarily moved its servers inside Iran to ensure continued service stability. This arrangement will remain in place until the situation returns to normal.<br><br>Thank you for your understanding and continued support. 🙏",
+                    direction: "ltr",
+                },
+                fa: {
+                    title: "به‌روزرسانی دامنه",
+                    subtitle: "اطلاعیه مهم",
+                    redirectInfo:
+                        "🔄 انتقال خودکار: شما در {countdown} ثانیه به دامنه جدید منتقل خواهید شد.",
+                    redirectingNow: "🔄 در حال انتقال...",
+                    ctaButton: "بازدید از smkoacademy.ir",
+                    oldDomain: "دامنه قدیم:",
+                    newDomain: "دامنه جدید:",
+                    brandName: "سمکو آکادمی",
+                    message:
+                        "با توجه به شرایط فعلی کشور و اختلالات اینترنت بین‌الملل، سامانه سمکو آکادمی به منظور حفظ پایداری خدمات، سرورهای خود را به داخل کشور منتقل کرده است. این تغییر موقتی بوده و تا بهبود شرایط ادامه خواهد داشت<br><br>از همراهی و درک شما سپاسگزاریم. 🙏.",
+                    direction: "rtl",
+                },
+                krd: {
+                    title: "نوێکردنەوەی دۆمەین",
+                    subtitle: "ئاگاداریی گرینگ",
+                    redirectInfo:
+                        "🔄 گواستنەوەی خۆکار: لە {countdown} چرکەدا بۆ دۆمەینی نوێ دەگوازرێیتەوە.",
+                    redirectingNow: "🔄 ئێستا دەگوازرێتەوە...",
+                    ctaButton: "سەردانی smkoacademy.ir",
+                    oldDomain: "دۆمەینی کۆن:",
+                    newDomain: "دۆمەینی نوێ:",
+                    brandName: "ئەکادیمیای سمکۆ",
+                    message:
+                        "بەهۆی بارودۆخی ئێستای وڵات و کێشەی تۆڕی نێودەوڵەتی، سمکۆئاکادێمی بۆ پاراستنی پایداری خزمەتگوزارییەکان، سێرڤێرەکانی بۆ ناو ئێران گواستۆتەوە. ئەم گۆڕانکارییە بەشێوەی کاتی دەبێت و تا ئاساییبوونەوەی بارودۆخ، بەم شێوە بەردەوام دەبێت.<br><br>سوپاس بۆ تێگەشتن و هاوکارییەکەتان. 🙏",
+                    direction: "rtl",
+                },
+            };
+
+            // Language switching functionality
+            function showLanguage(lang) {
+                // Hide all language sections
+                document
+                    .querySelectorAll(".language-section")
+                    .forEach((section) => {
+                        section.classList.add("hidden");
+                    });
+
+                // Remove active class from all language buttons
+                document.querySelectorAll(".language-btn").forEach((btn) => {
+                    btn.classList.remove("active");
+                });
+
+                // Show selected language section
+                document
+                    .getElementById("lang-" + lang)
+                    .classList.remove("hidden");
+
+                // Add active class to clicked button (only if event exists)
+                // If no event, find and activate the correct button
+                document
+                    .querySelectorAll(".language-btn.btn-" + lang)
+                    .forEach((btn) => {
+                        btn.classList.add("active");
+                    });
+
+                // Update translated content
+                updateContent(lang);
+            }
+
+            function updateContent(lang) {
+                const t = translations[lang];
+                const container = document.getElementById("main-container");
+
+                // Update title and subtitle
+                document.getElementById("main-title").textContent = t.title;
+                document.getElementById("main-subtitle").textContent =
+                    t.subtitle;
+
+                // Update CTA button
+                document.getElementById("main-cta").textContent = t.ctaButton;
+
+                // Update footer labels
+                document.getElementById("old-domain-label").textContent =
+                    t.oldDomain;
+                document.getElementById("new-domain-label").textContent =
+                    t.newDomain;
+
+                // Update brand name and message for current language
+                document.getElementById("message-" + lang).innerHTML =
+                    t.message;
+
+                // Update redirect info with current countdown
+                const currentCountdown = countdown;
+                document.getElementById(
+                    "redirect-info"
+                ).innerHTML = `<strong>${t.redirectInfo.replace(
+                    "{countdown}",
+                    currentCountdown
+                )}</strong>`;
+
+                // Update direction
+                if (t.direction === "rtl") {
+                    container.classList.add("rtl");
+                } else {
+                    container.classList.remove("rtl");
+                }
+
+                // Store current language for countdown updates
+                currentLanguage = lang;
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                showLanguage("krd");
+
+                // Auto-redirect after 20 seconds
+                setTimeout(function () {
+                    window.location.href = "https://smkoacademy.ir";
+                }, 20000);
+
+                const interval = setInterval(function () {
+                    countdown--;
+                    const t = translations[currentLanguage];
+
+                    if (countdown > 0) {
+                        document.getElementById(
+                            "redirect-info"
+                        ).innerHTML = `<strong>${t.redirectInfo.replace(
+                            "{countdown}",
+                            countdown
+                        )}</strong>`;
+                    } else {
+                        clearInterval(interval);
+                        document.getElementById(
+                            "redirect-info"
+                        ).innerHTML = `<strong>${t.redirectingNow}</strong>`;
+                    }
+                }, 1000);
+            });
+        </script>
+    </body>
+</html>
